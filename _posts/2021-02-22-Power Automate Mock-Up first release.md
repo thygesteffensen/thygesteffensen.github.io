@@ -21,7 +21,7 @@ This flow is based on a colleague having trouble checking for empty string value
 
 ![Flow screenshot]({{page.image1}})
 
-The flow JSON is available at the source code for the demonstration.
+The flow JSON is available in the source code for the demonstration.
 
 ## Create a new C\# Test Project
 
@@ -54,7 +54,7 @@ public void Setup()
 ## Create the unit test
 
 ### Set up
-Everything have been set up, and we're ready to write our first test. The test is strucutred in the AAA (Arrange, Act, Assert) pattern, we will start with the following:
+Everything has been set up, and we're ready to write our first test. The test is structured in the AAA (Arrange, Act, Assert) pattern, we will start with the following:
 
 ```cs 
 [Test]
