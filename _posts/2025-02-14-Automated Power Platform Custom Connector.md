@@ -5,7 +5,7 @@ layout: post1
 tags: ["Power Platform", "Custom Connector"]
 ---
 
-As of writing this post and preparing the accompanying demonstration repository, I noticed that .NET 9 allows to serialize a `OpenApiDocument` as version 2 (also known as Swagger 2.0, aka. the version supported by Custom Connectors) - while Swashbuckle does not have support for that (from what I could see). Thus, the first iteration was an, successful but fragile, attempt to solve the problem using a varied selection of tools. This solution can be viewed in an upcoming post.
+As of writing this post and preparing the accompanying demonstration repository, I noticed that .NET 9 allows to serialize a `OpenApiDocument` as version 2 (also known as Swagger 2.0, aka. the version supported by Custom Connectors) - while Swashbuckle does not have support for that (from what I could see). Thus, the first iteration was an, successful but fragile, attempt to solve the problem using a varied selection of tools. This solution can be viewed in [this post](/2025/02/20/OpenAPI-30-Automated-Custom-Connector.html).
 
 _Disclaimer: This is just one approach. One could also: use a package that will generate a Swagger 2.0 spec, instead of OpenAPI 3.0; or modify the generated OpenAPI 3.0 to be compatible with Custom Connector using the OOB features in Swashbuckle; or use another framework which still supports Swagger 2.0._
 
