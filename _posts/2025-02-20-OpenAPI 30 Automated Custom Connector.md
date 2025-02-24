@@ -8,7 +8,7 @@ tags: ["Power Platform", "Custom Connector"]
 
 This was the first iteration of automating a Custom Connector. The WebAPI was initial build in .NET 8 and used [Swashbuckle](https://github.com/domaindrivendev/Swashbuckle.AspNetCore) to generate and expose the OpenAPI document as OpenAPI 3.0.
 
-While writing [Automated Power Platform Custom Connector](/2025/02/14/Automated-Power-Platform-Custom-Connector.html) and constructing a demonstration, I discovered that OpenAPI support in .NET 9 supported outputting the OpenAPI document as Swagger 2.0, both run-time and build-time.
+While writing [Automated Power Platform Custom Connector]({% post_url 2025-02-14-Automated-Power-Platform-Custom-Connector %}) and constructing a demonstration, I discovered that OpenAPI support in .NET 9 supported outputting the OpenAPI document as Swagger 2.0, both run-time and build-time.
 
 However, some might be "stuck" on .NET 8 until the next LTS, or they might only get a OpenAPI 3.0 document from a vendor, then this method will work!
 
