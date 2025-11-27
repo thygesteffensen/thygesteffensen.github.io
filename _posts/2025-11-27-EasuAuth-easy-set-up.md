@@ -7,29 +7,29 @@ tags: []
 
 I had some trouble figuring out how to enable EasyAuth _and_ controlling which users/applications that could access the "EasyAuth'ed" "app".
 
-I was following [this guide](https://learn.microsoft.com/en-us/azure/container-apps/authentication-entra) from Microsoft, which was a bit outdated and when finished, every User in my tenant could access my site and no application could access it.
+I was following [this guide](https://learn.microsoft.com/en-us/azure/container-apps/authentication-entra) from Microsoft, which was a bit outdated and when finished, every User in my tenant could access my site and no application could access it. Better than every one ^.^
 
-Following this guide will:
+Following this guide, will:
 - Enable Easy Auth for a Container App.
 - Limit which users can access the Container App.
 - Limit which applications can access the Container App.
 
 In other words, give explicit access to users and/or applications to access a Container App. Notice that, Easy Auth is a all or nothing setup -- either you can access the app or you cannot.
-If you want granulated control, for example to have a home site and expose API which have individual access requirements - I would use something like [Authentication and Authorization in ASP.NET Web API](https://learn.microsoft.com/en-us/aspnet/web-api/overview/security/authentication-and-authorization-in-aspnet-web-api).
+If you want granulated control, for example to have a home page open or expose API which have individual access requirements - I would use something like [Authentication and Authorization in ASP.NET Web API](https://learn.microsoft.com/en-us/aspnet/web-api/overview/security/authentication-and-authorization-in-aspnet-web-api).
 
 Without testing, this guide might also work for App Services and Logic Apps, where "EasyAuth" is also availible.
 
 # Spin up a container app
 
-_I will follow this guide, and they try to set it up on a real set-up afterwards_
+_Instead of applying this in your current setup, I would follow it and apply it to the real set-up afterwards - to get familiar with it all._
 
 Let's start by spinning up container app using the 'Quick start image' or `mcr.microsoft.com/azuredocs/containerapps-helloworld:latest` and remember to enable 'Ingress' from everywhere.
 
-Et voila - we got a site which we can access following the url yielding:
+Et voila - we got a site which we can access and the following url yields:
 
 ![Web capture showing hello world container app](/assets/images/2025-11-27-hello-world.png)
 
-And the following simple .NET Console App:
+And this simple .NET Console App:
 ```csharp
 var httpClient = new HttpClient();
 var resp  = await httpClient.GetAsync("https://ca-easyauth-setup-we-01.whitecoast-ef2c042a.westeurope.azurecontainerapps.io/");
@@ -46,7 +46,7 @@ So far, we have a Container App - which everybody can access. Not good for a non
 # Create an App Registration (Container App)
 
 
-1. Let's create a App Registration representing the Container App.
+1. Let's create a 'App Registration' representing the 'Container App'.
    ![New app registration](/assets/images/2025-11-27-new-app-reg.png)
 2. Go to 'Manage > Authentication (Preview)' and under the 'Settings' tab, enable 'ID tokens (used for implicit and hybrid flows)'.
       ![Enable ID tokens](/assets/images/2025-11-27-authentication-settings.png)
@@ -61,21 +61,22 @@ So far, we have a Container App - which everybody can access. Not good for a non
 
 # Configure Easy Auth 
 
-1. Go back to the Container App.
+1. Go back to the 'Container App'.
 2. Go to 'Security > Authentication'.
 3. Add 'Add identity provider' and select 'Microsoft' as the 'Identity provider'.
-   1. Select'Pick an existing app registration in this directory' and select expiry.
-   2. Enable 'Allow requests from any application (Not recommended)'. This is okay, because we enable 'Assignment required?' in the 'Enterprise Application'.
+   1. Select 'Pick an existing app registration in this directory' and select expiry.
+   2. Enable 'Allow requests from any application (Not recommended)'. This is okay, because we enabled 'Assignment required?' in the 'Enterprise Application'.
       ![Container App Authentication set-up](/assets/images/2025-11-27-container-app-auth-set-up.png)
-   4. Save and edit to set audience which is the 'Application ID' under ''Mange > Expose an API' from above (Yes... according to this should be default, but it need to be explicit...).
+   4. Save and edit to set audience which is the 'Application ID' under 'Mange > Expose an API' from above (Yes... according the documentation this should be a default, but it need to be explicit...).
       ![Container App Authentication](/assets/images/2025-11-27-container-app-authentication.png)
    5. Press 'Add' and wait - now neither a User or Application can access the Container App.
 
-Now we get and 
+Now we get this output from running the previous console app:
 ```bash
 $ dotnet run
 Unauthorized
 ```
+That's good - we also get a log-in screen when accessing the web-page.
 
 # Give access to Users
 
@@ -90,7 +91,7 @@ Unauthorized
 3. Grant permission.
 4. Get details to get a token using the App Registration.
 
-Now using the below simple Console App:
+Now using the below simple console app:
 ```csharp
 // From 'Azure.Identity' NuGet package
 var provider = new ClientSecretCredential(
@@ -122,3 +123,4 @@ Now, we have enabled authentication for our Container App, and explicit grant ac
 
 - Not enabling 'Assignment required?' will make all users in the tenant able to access the app.
 - Enabling 'Allow requests from any application (Not recommended)' will make.
+- Some would argue that this is "more" fragile than a coded approach. Because, this can be "disabled" by ill-configuring the 'Container App' or the 'Enterprise Application' whereas the coded approach most likely will go through a pull request.
