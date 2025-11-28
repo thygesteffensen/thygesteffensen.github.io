@@ -65,4 +65,5 @@ Evaluating the expression is as easy as walking the tree, where each node can ei
 * ValueNode, being a terminal
 * FunctionNode, being a function name and a list of Nodes
 * AccessNode, being two Node, where the lhs must be either a object or list and rhs a terminal*
-* 
+
+To be continued... 
