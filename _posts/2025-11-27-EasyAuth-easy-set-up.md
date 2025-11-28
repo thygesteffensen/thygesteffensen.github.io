@@ -122,5 +122,5 @@ Now, we have enabled authentication for our Container App, and explicit grant ac
 # Gotcha
 
 - Not enabling 'Assignment required?' will make all users in the tenant able to access the app.
-- Enabling 'Allow requests from any application (Not recommended)' will make.
+- Enabling 'Allow requests from any application (Not recommended)' will make any application in the tenant access the Container App, if 'Assignment required?' is not enabled.
 - Some would argue that this is "more" fragile than a coded approach. Because, this can be "disabled" by ill-configuring the 'Container App' or the 'Enterprise Application' whereas the coded approach most likely will go through a pull request.
