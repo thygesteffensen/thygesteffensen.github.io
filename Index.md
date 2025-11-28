@@ -3,7 +3,7 @@
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 
 layout: home
-permalink: /home/
+permalink: /
 ---
 I created this site to write about Power Automate Mock-Up and to provide little posts of how to use PAMU, how I have/will use it and upcoming changes or features. 
 
