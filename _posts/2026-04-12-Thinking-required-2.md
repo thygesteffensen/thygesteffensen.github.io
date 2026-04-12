@@ -5,7 +5,7 @@ layout: post1
 tags: ["Thinking required"]
 ---
 
-Continuing from [Part 1]({% link 2026-04-12-Thinking-required.md %})
+Continuing from [Part 1](/2026/04/12/Thinking-required.html)
 
 Alright, the plan is to: Get the local llm to be able to spin up a new martin instance, load data into it, and benchmark how it generates a part of the map - reflecting on that and make it quicker. Then to ensure the output is as I want, it should capture the map and compare it with an expected output (which I kinda of have).
 
